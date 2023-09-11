@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12345</title>
+    <style>
+        #valgKnapper, #bekreftOtp, #bekreftBtn
+        {
+            visibility:hidden;
+        }
+        
+        body{
+            text-align: center;
+        }
+
+        #inpPIR{
+            margin: 10px;
+            padding: 10px;
+            background-color: lightblue;
+
+        }
+
+        #inpPIR:hover{
+            box-shadow: 5px 5px 5px gray;
+        }
+
+        #divNeste{
+            text-align: right;
+            margin-right:300px;
+            margin-top: 5px;
+            margin-bottom:5px;
+        }
+
+        #tilbake{
+            visibility: hidden;
+        }
+
+        #tabell, #thO{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+        <label id="passordLabel">Passord:</label>
+        <input id="passordInp" type="text" placeholder="skriv inn passord">
+        <input type="button" value="Registrer" id="reg" onclick="regPassord()">
+        <div id="divNeste">
+        <input type="button" value="Neste side →" id="neste" onclick="nesteSide()">
+        <input type="button" value="Forrige side" id="tilbake" onclick="tilbakeSide()">
+    </div>
+    <div id="valgKnapper">
+        
+    </div>    
+    <textarea id="bekreftOtp" cols="30" rows="5"></textarea><br>
+        <input type="button" value="Bekreft" id="bekreftBtn" onclick="bekreft(event)">
+        <table>
+            <thead>
+                <tr>
+                    <th id="thO">Parti</th>
+                    <th id="thO">Prosent</th>
+                </tr>
+            </thead>
+            <tbody id="tabell">
+            </tbody>
+        </table>
+
+<script>
+    
+    //_______________________________________________________________
+            let passord = [            
+            {check:"Passord001"},
+            {check:"Passord002"},
+            {check:"Passord003"},
+            {check:"Passord004"},
+            {check:"Passord005"},
+            {check:"Passord006"},               
+            {check:"Passord007"},
+            {check:"Passord008"},
+            {check:"Passord009"}
+        ]
+
+        
+
+
+        function regPassord(){
+        var passordFinnes =false    
+        passordEl = document.getElementById("passordInp").value
+        for(var i = 0; i<passord.length;i++){
+            if(passordEl == passord[i].check){
+                passordFinnes=true;
+                passord.splice(i,1)
+                valgKnapper.style.visibility = "visible"
+                reg.style.visibility = "hidden"
+                break;
+            }
+            
+        }
+        
+
+        if(passordFinnes == false){
+            window.alert("Feil Passord!")
+        }
+
+
+
+    }
+    //_______________________________________________________
+    partier = [           
+            {parti:"Rødt", antall:4},
+            {parti:"SV", antall:5},
+            {parti:"Ap", antall:23},
+            {parti:"SP", antall:5},
+            {parti:"MDG", antall:4},
+            {parti:"KrF", antall:3},
+            {parti:"V", antall:7}, 
+            {parti:"H", antall:28},
+            {parti:"FrP", antall:17},
+            {parti:"PIR", antall:4}]
+            let partiValgt=0
+            window.onload=start;
+        function start()
+        {
+            buttonShow();
+            vis();
+
+        }
+         function buttonShow()
+         {
+             document.getElementById("valgKnapper").innerHTML =""
+             for(var i=0;i<partier.length;i++)
+             {
+                 document.getElementById("valgKnapper").innerHTML +="<button onclick ='leggTil(event)' id='inpPIR'  value='"+i+"'>"+partier[i].parti+" </button>"
+             }
+         }
+        
+         function vis(){
+            leggTilProsent()
+            document.getElementById("tabell").innerHTML="";
+            for(var i=0;i<partier.length;i++){
+                document.getElementById("tabell").innerHTML+=
+                "<tr> <td>"+partier[i].parti+
+                    "<td> <td>"+(partier[i].prosent).toFixed(2)+"%"+
+                                        "</td> </tr>" ;
+         }}
+
+         function leggTil(event)
+         {
+            bekreftBtn.style.visibility = "visible"
+            bekreftOtp.style.visibility = "visible"
+             console.log(event.target.value)
+             document.getElementById("bekreftOtp").innerHTML = ""
+             document.getElementById("bekreftOtp").innerHTML = "Du er sikker på at du vil gi en stemme til "+partier[event.target.value].parti+"?" + "\n" + "\n" + "\n" + "Trykk bekreft for å fortsette!"
+             partiValgt = event.target.value   
+
+         }
+
+         function bekreft(event){
+            valgKnapper.style.visibility = "hidden"
+            bekreftBtn.style.visibility = "hidden"
+            bekreftOtp.style.visibility = "hidden"
+            reg.style.visibility = "visible"
+            document.getElementById("bekreftOtp").innerHTML = ""
+            document.getElementById("passordInp").value = "";
+
+            partier[partiValgt].antall++;
+
+         }
+         let sum = 0
+
+         function nesteSide(){
+             vis();
+             leggTilProsent()
+            valgKnapper.style.visibility = "hidden"
+            bekreftBtn.style.visibility = "hidden"
+            bekreftOtp.style.visibility = "hidden"
+            passordInp.style.visibility = "hidden"
+            reg.style.visibility = "hidden"
+            neste.style.visibility = "hidden"
+            passordLabel.style.visibility = "hidden"
+            tilbake.style.visibility = "visible"
+            tabell.style.visibility = "visible"
+         }
+
+         function leggTilProsent(){
+            for(var i=0; i<partier.length;i++){
+                sum += partier[i].antall
+            }
+            console.log(sum)
+            for(var i=0; i<partier.length;i++){
+                partier[i].prosent = (partier[i].antall/sum)*100
+            }
+         }
+
+         function tilbakeSide(){
+            passordInp.style.visibility = "visible";
+            reg.style.visibility = "visible";
+            neste.style.visibility = "visible";
+            passordLabel.style.visibility = "visible";
+            tilbake.style.visibility = "hidden";
+            tabell.style.visibility = "hidden"
+         }
+
+
+</script>
+ 
+</body>
+</html>
