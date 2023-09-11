@@ -1,48 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>12345</title>
-</head>
-<label>Aldersgrense </label>
-  <br>
-  <select id="inpAldersgrense">
-    <option>Tillat for alle</option>
-    <option>18 år</option>
-    <option>16 år</option>
-    <option>12 år</option>
-    <option>7 år</option>
-</select>
-<br>
+<html lang='no'>
+ <head>
+   <meta charset='utf-8'>
+   <title>test</title>
+   <style>
+       body{
+           background-color:skyblue;
+       }
+       label{
+           color:whitesmoke;
+           font-size:larger;
+       }
 
-<h3>Format</h3>
+       input{
+           font-size:larger;
+           width:100%;
+           padding:5px;
+           display:block;
+           margin-top:2px;
+           margin-bottom:10px;
+           color:#666666;
+           border:1px solid rgba(0,0,0,0.1);
+           box-shadow:0px 1px 5px rgba(0,0,0,0.7);
+           box-sizing:border-box;
+           text-align:center;
+           border-radius:5px;
+       }
 
-<input type="checkbox" id="inpFormat">
-    <label>Kino</label>
-    <br>
-    <input type="checkbox" id="inpFormat">
-    <label>DVD</label>
-    <br>
-    <input type="checkbox" id="inpFormat">
-    <label>Strømmetjeneste</label>
-    <br>
-    <input type="checkbox" id="inpFormat">
-    <label>TV</label>
-    <br>
+       #divRegForm
+       {
+        width:500px;
+        background-color:darkcyan;
+        padding:20px;
+        margin:20px auto;
+        text-align:center;
+        border-radius:25px;
+        box-shadow:5px 5px 15px rgba(0,0,0,0.7);
+       }
 
-    <h3>Fått Oscar?</h3>
+    button{
+        font-size: larger;
+        padding:10px;
+        border-radius:5px;
+    }
 
-    <input type="radio" name="fåttOscar">
-    <label>Ja</label>
-    <br>
-    <input type="radio" name="fåttOscar">
-    <label>Nei</label>
-    <br>
-    <br>
-    <button type="submit">Registrer</button>
+    input[type="color"]
+    {
+        height:40px;
+        border-radius:5px;
+        width:50%;
+        margin:10px auto;
+    }
+   </style>
+ </head>
+<body>
+<div id="divRegForm">
+ <form>
+  <label>Fornavn: </label>
+  <input type="text" id="inpFornavn"
+  required>
+  <label>Etternavn: </label>
+  <input type="text" required>
+  <label>Alder: </label>
+  <input type="number" required min="0" max="130">
+  <label>Epost: </label>
+  <input type="email" required>
+  <label>Pincode: (2 store bokstaver og 4 siffer)</label>
+  <input type="text" pattern="[A-Z]{2}[0-9]{4}"
+  title="2 Store bokstaver og 4 siffer" required>
+  <label>Fødselsdato: </label>
+  <input type="date" required>
+  <label>Favorittfarge: </label>
+  <input type="color" required>
 
+
+  <button type="submit">registrer</button>
  </form>
 </div>
 </body>
+</html>
+<!DOCTYPE html>
+<html lang='no'>
+ <head>
+   <meta charset='utf-8'>
+   <title>test</title>
+   <style></style>
+ </head>
+<body>
+    <input type="checkbox" id="inpOver18">
+    <label>Er over 18!</label>
+    <br>
+    <label>Hvor bor du?</label>
+    <br>
+    <input type="radio" name="boLand" checked>
+    <label>Jeg bor i Norge</label>
+    <br>
+    <input type="radio" name="boland">
+    <label>Europa</label>
+    <br>
+    <input type="radio" name="boLand">
+    <label>Utenfor Europa</label>
+    <br>
+    <fieldset>
+        <legend>Velg kjønn</legend>
+    <label>Mann</label>
+    <input type="radio" name="Kjønn" checked>
+    <br>
+    <label>Dame</label>
+    <input type="radio" name="Kjønn">
+</fieldset>
 
+<select id="inpVelgFarge">
+    <option disabled selected>Velg en farge</option>
+    <option>Rød</option>
+    <option>Blå</option>
+    <option>Grønn</option>
+    <option>Gul</option>
+</select>
+
+<input type="text" id="inpBrowser" list="browser">
+<datalist id="browser">
+    <option>Microsoft Edge</option>
+    <option>Firefox</option>
+    <option>Chrome</option>
+    <option>Opera</option>
+    <option>Safari</option>
+</datalist>
+
+</body>
 </html>
